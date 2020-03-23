@@ -179,20 +179,6 @@ end
             \path [line] (output) -- (end);
             \path [line] (null) -| (end);
             \path [line] (increment) -- ($ (increment) + (-2, 0)$) |- (while);
-            %\path [line] (start) -- (in);
-            %\path [line] (in) -- (increment);
-            %\path [line] (increment) -- (decision);
-            %\path [line] (decision) -| node [near end] {true} (outpos);
-            %\path [line] (decision) -| node [near end] {false} (outneg);
-            %\path [line] (outpos) -- (stop);
-            %\path [line] (outneg) -- (stop);
-
-            %\node [right = 1.5 of start] {Start block};
-            %\node [right = 1.5 of in] {Data input block};
-            %\node [right = 1.5 of increment] {Execution block};
-            %\node [right = 1.5 of decision] {Condition block (selection/iteration)};
-            %\node [right = .5 of outneg] {Data output block};
-            %\node [right = 1.5 of stop] {Finish block};
         \end{tikzpicture}
     }
     \end{minipage}
@@ -227,9 +213,6 @@ return True
     Python is an \alert{interpreted, high-level, general-purpose} programming language created in 1991.
 
     \pause
-    Nice, but what does it mean?
-
-    \pause
     \begin{itemize}[<+->]
         \item Interpreted = instructions are executed directly, without previously translating the program in
             machine-language.
@@ -257,8 +240,8 @@ return True
     Such a file is called a script.
     Scripts have the advantage that they can be saved to disk, printed, and so on.
 
-    A script is just a text file, so you can use whichever editor you prefer to write i,
-    I will use Vim\footnote{\url{https://en.wikipedia.org/wiki/Editor_war}}
+    A script is just a text file, so you can use whichever editor you prefer to write it,
+    I will use Vim\footnote{\url{https://en.wikipedia.org/wiki/Editor_war}}.
 
     You can try PyCharm\footnote{\url{https://www.jetbrains.com/pycharm/}}, which is  a nice IDE available for
     GNU/Linux, Windows and Mac.
@@ -290,9 +273,9 @@ print("Hello world!")
 \begin{frame}{Python variables}
     \begin{itemize}[<+->]
         \item A \emph{variable} is a memory location where you can store data.
-        \item Differently from other languages, you do not need to explicitly declare a variable
-        \item Every data value has a \emph{type} (e.g., number, list, character, string, \ldots)
-        \item Python uses a \emph{dynamic} type system, so a variable can change its type over time
+        \item Differently from other languages, you do not need to explicitly declare a variable.
+        \item Every data value has a \emph{type} (e.g., number, list, string, \ldots).
+        \item Python uses a \emph{dynamic} type system, so a variable can change its type over time.
     \end{itemize}
 \end{frame}
 
@@ -327,7 +310,7 @@ print(a)
     You can also combine a string with a variable:
     \begin{minted}[fontsize=\scriptsize]{python}
 a = 42
-print('The answer you are looking for is ', a)
+print('The answer you are looking for is', a)
     \end{minted}
     This code will print ``The answer you are looking for is 42''
 \end{frame}
@@ -372,6 +355,102 @@ x2 = (-b - delta**1/2) / (2*a)
 # The format function, when applied to a string will replace every {} in the string
 # with one of its arguments
 print("The solutions of {}x^2+{}x+{}=0 are {} and {}".format(a, b, c, x1, x2))
+    \end{minted}
+\end{frame}
+
+\begin{frame}{The if/elif/else keywords}
+    \begin{itemize}
+        \item The \emph{if} keyword is used to implement the selection construct
+        \item Python supports the usual logical conditions from mathematics:
+            \begin{itemize}
+                \item Equals: a == b
+                \item Not Equals: a != b
+                \item Less than: a < b
+                \item Less than or equal to: a <= b
+                \item Greater than: a > b
+                \item Greater than or equal to: a >= b
+            \end{itemize}
+        \item Logical conditions can be combined with the usual logical operator \emph{and, or, not}.
+        \item Python relies on \emph{indentation} to group statements
+        \item An indented suite of statements starts with a colon ':'
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{The if/elif/else keywords}
+    \begin{minted}[fontsize=\scriptsize]{python}
+a = int(input())
+b = int(input())
+if a > b:
+    print("The first number is bigger")
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{The if/elif/else keywords}
+    The \emph{elif} keyword means ``If the previous if was False, but this condition is True, then do the following''
+    \begin{minted}[fontsize=\scriptsize]{python}
+a = int(input())
+b = int(input())
+if a > b:
+    print("The first number is bigger")
+elif a == b:
+    print("The two numbers are equal")
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{The if/elif/else keywords}
+    The \emph{else} keyword catches everything which isn't caught by the preceding conditions.
+    \begin{minted}[fontsize=\scriptsize]{python}
+a = int(input())
+b = int(input())
+if a > b:
+    print("The first number is bigger")
+elif a == b:
+    print("The two numbers are equal")
+else:
+    print("The second number is bigger")
+    \end{minted}
+\end{frame}
+
+\begin{frame}{The if/elif/else flowchart}
+        \begin{tikzpicture}[auto]
+            \node [startstop] (start) {Begin};
+            \node [input, below = of start] (in) {Read a, b};
+            \node [decision, below = of in] (if) {a > b ?};
+            \node [decision, right = of if] (elif) {a = b ?};
+            \node [output, below = of if] (first) {First};
+            \node [output, below = of elif] (equal) {Equal};
+            \node [output, right = of equal] (second) {Second};
+            \node [startstop, below = of first] (end) {End};
+
+            \path [line] (start) -- (in);
+            \path [line] (in) -- (if);
+            \path [line] (if) -- node [near start] {true} (first);
+            \path [line] (if) -- node [near start] {false} (elif);
+            \path [line] (elif) -- node [near start] {true} (equal);
+            \path [line] (elif) -| node [near start] {false} (second);
+            \path [line] (first) -- (end);
+            \path [line] (equal) |- (end);
+            \path [line] (second) |- (end);
+        \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{Python program example}
+    Write a program that reads three float numbers and determines whether they can be the edges of a right triangle.
+    \pause
+
+    \begin{minted}[fontsize=\scriptsize]{python}
+a = float(input())
+b = float(input())
+c = float(input())
+
+if a <= 0 or b <= 0 or c <= 0:
+    print("They are not the edges of a triangle")
+elif (a**2 + b**2 == c**2) or
+     (a**2 + c**2 == b**2) or
+     (b**2 + c**2 == a**2):
+    print("Yes")
+else:
+    print("No")
     \end{minted}
 \end{frame}
 
@@ -481,7 +560,38 @@ while True do:
     return pi
         \end{lstlisting}
     \end{minipage}
+\end{frame}
 
+\begin{frame}[fragile]{Question time}
+    Is this a valid python program?
+    \begin{minted}{python}
+a = 3
+b = 5
+if a > b:
+print(a)
+else:
+print(b)
+\end{minted}
+\end{frame}
 
+\begin{frame}[fragile]{Question time}
+    Is this a valid python program?
+    \begin{minted}{python}
+a = 3
+b = 5
+a + b = c
+print("{} + {} = {}".format(a,b,c))
+\end{minted}
+\end{frame}
+
+\begin{frame}{Exercise}
+    Use flowcharts or pseudocode to design an algorithm for the following problem.
+
+    Write an algorithm which receives the marks of an exam, one student per time.
+    The user will insert -1 as mark when no more students are available.
+
+    The program then prints some summary statistics: the minimum, maximum and average mark, and the number of students
+    who passed the exam.
+    If the average mark is above 29, the program prints ``Increase exam difficulty!''
 \end{frame}
 \end{document}
