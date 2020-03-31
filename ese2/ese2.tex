@@ -1,0 +1,403 @@
+% !TeX spellcheck = en_GB
+
+\documentclass[aspectratio=169,]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{eurosym}
+%\usepackage{appendixnumberbeamer}
+
+\input{../setup-flowcharts.tex}
+\input{../setup-pseudocode.tex}
+\input{../setup-python.tex}
+
+\usetheme[titleformat=smallcaps, numbering=fraction, background=light, progressbar=frametitle]{metropolis}
+
+\title{Digital Technology}
+\subtitle{Python Data Types, Control Structures and Functions}
+
+\author{Stefano Cereda\\
+		stefano.cereda@polimi.it
+	}
+\date{31/03/2020}
+\institute[PoliMi]{Politecnico Milano}
+\logo{\includegraphics[width=15mm]{../logopolimi}}
+
+\setbeamercovered{invisible}
+
+\makeindex
+
+\begin{document}
+\begin{frame}
+	\maketitle
+\end{frame}
+
+\begin{frame}[fragile]{Errata corrige}
+    To compute the square root of delta (slide 22) you need to type:
+    \begin{minted}[fontsize=\footnotesize]{python}
+delta ** (1/2)
+    \end{minted}
+    and not:
+    \begin{minted}[fontsize=\footnotesize]{python}
+delta ** 1/2
+    \end{minted}
+    due to operator precedence
+\end{frame}
+
+
+\begin{frame}[fragile, allowframebreaks]{Sets}
+    A \emph{set} object represents an \alert{unordered} collection of \alert{unique} objects.
+
+    They support usual set operations like membership testing, addition and removal.
+        \begin{minted}[fontsize=\footnotesize]{python}
+myset = set()  # set creation
+myset.add(1)  # add an element to a set
+myset.add(2)  # add another element
+myset.add(1)  # 1 is already in my set, no effect
+print(myset)  # will print {1, 2}
+print(1 in myset)  # will print True
+myset.remove(1)  # remove an element from a set
+print(1 in myset)  # will print False
+        \end{minted}
+
+        \framebreak
+        They also support common sets operations like intersection, union and difference.
+        \begin{minted}[fontsize=\footnotesize]{python}
+my_set = {2}  # quick way to create a set with element 2
+another_set = set()
+another_set.add(10)
+another_set.add(20)
+
+final_set = myset.union(another_set)  # union of sets {2} and {10, 20}
+print(final_set)  # will print {2, 10, 20}
+        \end{minted}
+
+        \footnotesize{
+        \url{https://docs.python.org/3/tutorial/datastructures.html#sets}
+        \url{https://docs.python.org/3.8/library/stdtypes.html#set}
+        }
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Lists}
+    \emph{Lists} are used to store \alert{ordered sequences} of objects.
+
+        \begin{minted}[fontsize=\footnotesize]{python}
+first_list = list()  # empty list creation
+first_list.append(1)  # add an element to the end of the list
+first_list.append(2)
+first_list.append(1)
+print(first_list)  # will print [1,2,1]
+
+second_list = [10,20,10,20,10]  # another way to create lists
+print(second_list)  # will print [10,20,10,20,10]
+print(second_list[0])  # list indexing, will print 10
+a = second_list[0:3]  # slice from index 0 (included) to index 3 (excluded)
+print(a)  # will print [10, 20, 10]
+        \end{minted}
+
+        \framebreak
+        \begin{minted}[fontsize=\footnotesize]{python}
+print(20 in first_list)  # membership testing as in sets
+print(first_list + second_list)  # sum of lists is their concatenation
+print(len(first_list))  # number of elements: 3
+print(min(first_list))  # 1
+print(max(second_list)) # 20
+print(sorted(second_list))  # [10, 10, 10, 20, 20]
+
+second_list.append('hello')  # a list can contain heterogeneous types
+second_list.append([1,2,3])  # a list can be the element of another list
+print(second_list)  # [10, 20, 10, 20, 10, 'hello', [1, 2, 3]]
+        \end{minted}
+
+        \footnotesize{
+            \url{https://docs.python.org/3/tutorial/datastructures.html#more-on-lists}
+            \url{https://docs.python.org/3.8/library/stdtypes.html#list}
+        }
+\end{frame}
+
+\begin{frame}[fragile]{Dictionaries}
+    A \emph{dictionary} is an associative data type.
+    Differently from lists, dictionary items are indexed by \alert{keys} instead of numeric indexes.
+
+    A dictionary can be viewed as a set of \alert{key: value} pairs, with the requirement that the keys are unique.
+
+        \begin{minted}[fontsize=\footnotesize]{python}
+address = {'alice': 1234, 'bob': 0101}  # dictionary creation
+print(address['alice'])  # 1234
+address['charlie'] = 5555  # store a new element
+del address['bob']  # remove an element
+print('charlie' in address)  # True
+print('bob' not in address)  # True
+print(1234 in address)  # False, we check on keys
+        \end{minted}
+
+        \footnotesize{
+    \url{https://docs.python.org/3/tutorial/datastructures.html#dictionaries}
+    \url{https://docs.python.org/3.8/library/stdtypes.html#mapping-types-dict}
+}
+\end{frame}
+
+\begin{frame}[fragile]{While}
+    The \emph{while} statement is used to repeat the execution of a suite of statements as long as an expression is
+    true:
+
+    \begin{minipage}{0.49\textwidth}
+        \begin{minted}[fontsize=\footnotesize]{python}
+i = 0
+while i < 10:
+    print(i)
+    i = i + 1
+        \end{minted}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \resizebox{!}{4cm}{
+            \begin{tikzpicture}[auto]
+                \node [startstop] (start) {Begin};
+                \node [block, below = of start] (init) {i = 0};
+                \node [decision, below = of init] (while) {i < 10?};
+                \node [output, right = of while, text width=1cm] (print) {i};
+                \node [block, right = of print] (increment) {i=i+1};
+                \node [startstop, below = of while] (end) {End};
+
+                \path [line] (start) -- (init);
+                \path [line] (init) -- (while);
+                \path [line] (while) -- node [near start]{True} (print);
+                \path [line] (print) -- (increment);
+                \path [line] (increment) -- ($ (increment) + (0, 1) $) -| (while);
+                \path [line] (while) -- node [near start] {False} (end);
+            \end{tikzpicture}
+        }
+    \end{minipage}
+
+    This code prints all the numbers from 0 (included) to 10 (excluded)
+\end{frame}
+
+\begin{frame}[fragile]{For}
+    The \emph{for} statement is used to iterate over the elements of an iterable object, like strings, lists, sets or
+    dictionaries.
+
+    \begin{minted}[fontsize=\footnotesize]{python}
+my_list = [1, 10, 100, 1000]
+for number in my_list:
+    print(number)
+    \end{minted}
+\end{frame}
+
+%\begin{frame}{Break and continue}
+%    The \emph{break} statement is used to exit prematurely from an iteration.
+%
+%    The \emph{continue} statement is used to advance to the next iteration.
+%\end{frame}
+
+\begin{frame}[fragile]{Example: factorial}
+    Write a Python program to compute the factorial of a number N.
+    \pause
+
+    \begin{minted}[fontsize=\footnotesize]{python}
+number = int(input("Give me a number: "))
+result = 1
+factor = 1
+while factor <= number:
+    result = result * factor
+    factor = factor + 1
+print("{}! = {}".format(number, result))
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Example: factorial with range}
+    We can also use the \emph{range(a, b)} function to obtain an \emph{iterator} over the numbers from a (included) to b
+    (excluded).
+    \begin{minted}[fontsize=\footnotesize]{python}
+number = int(input("Give me a number: "))
+result = 1
+for factor in range(1, number+1):
+    result = result * factor
+print("{}! = {}".format(number, result))
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Example: computation of $\pi$}
+    Write a python program to compute an approximation of $\pi$.
+    Ask the number of iterations to the user and print an approximation every 10 iterations.
+
+    \pause
+    \begin{minted}[fontsize=\footnotesize]{python}
+max_iters = int(input("How many iterations? ")
+pi = 0
+# range(max) === range(0, max)
+# range(max_iters) will go from 0 to max_iters-1 (included)
+for n_iter in range(max_iters):
+    if n_iter % 2 == 0:
+        pi = pi + 1 / (2*n_iter + 1)
+    else:
+        pi = pi - 1 / (2*n_iter + 1)
+    # we are counting iterations from zero
+    if (n_iter+1) % 10 == 0:
+        print("The value of pi after {} iterations is {}".format(n_iter+1, 4*pi))
+print("The final approximation is {}".format(4*pi))
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{List comprehension}
+    List comprehensions provide a concise way to create lists:
+
+    \begin{minipage}{0.49\textwidth}
+    \begin{minted}[fontsize=\footnotesize]{python}
+squares = []
+for x in range(10):
+    squares.append(x**2)
+print(squares)
+    \end{minted}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+    \begin{minted}[fontsize=\footnotesize]{python}
+squares = [x**2 for x in range(10)]
+print(squares)
+    \end{minted}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]{Dictionary comprehension}
+    We also have dictionary comprehensions:
+
+    \begin{minipage}{0.49\textwidth}
+    \begin{minted}[fontsize=\footnotesize]{python}
+squares = {}
+for x in range(10):
+    squares[x] = x**2
+print(squares)
+    \end{minted}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+    \begin{minted}[fontsize=\footnotesize]{python}
+squares = {x: x**2 for x in range(10)}
+print(squares)
+    \end{minted}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}{Exercise: exam}
+    Write a python program that:
+    \begin{enumerate}
+        \item reads a sequence of student IDs, terminated by -1
+        \item for each student, reads the exam result
+        \item prints the IDs of the students who passed the exam
+        \item prints the minimum, maximum and average mark
+        \item prints the standard deviation of the marks
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Exercise: compound interest}
+    An amount of \euro5000 is deposited into a savings account at an annual interest rate of 5\%.
+
+    Compute and show the amount of money at the end of each year, for 10 years.
+\end{frame}
+
+\begin{frame}{Exercise: uppercase}
+    Write a python program that asks a the user to insert a phrase.
+    The program reads the phrase and considers the first word, repeating it in upper case.
+
+    You can convert a string in upper case with the \emph{.upper()} method.
+\end{frame}
+
+\begin{frame}[fragile]{Python function}
+    We have seen some \emph{functions} (len(), min(), max(), set(), \ldots).
+
+    A function is a piece of code that receives some \emph{parameters} and produces a result.
+
+    \begin{minipage}{0.49\textwidth}
+        Function definition:
+        \begin{minted}[fontsize=\footnotesize]{python}
+def my_function(a, b):
+    value = a + b
+    return value
+        \end{minted}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        Function calling:
+        \begin{minted}[fontsize=\footnotesize]{python}
+print(my_function(3,2))
+        \end{minted}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]{Function example: average}
+    You should write functions to execute common tasks, like computing the average value of an iterable object:
+
+        \begin{minted}[fontsize=\footnotesize]{python}
+def average(iterable):
+    return sum(iterable) / len(iterable)
+        \end{minted}
+
+        You can now compute the average of a list:
+        \begin{minted}[fontsize=\footnotesize]{python}
+print(average([1,2,3]))
+        \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Importing modules}
+    You can write many functions in a file (called \emph{module}) and use them in another script by \emph{importing}
+    them.
+
+    If you save the average function in a file called myfunctions.py, you can use it in another script with:
+    \begin{minted}[fontsize=\footnotesize]{python}
+import myfunctions
+print(myfunctions.average([1,2,3]))
+    \end{minted}
+
+    Python comes with a standard library, offering a wide variety of facilities:
+    \url{https://docs.python.org/3/library/}
+
+    For instance, we have the \emph{math} module for the \emph{sqrt} function:
+    \begin{minted}[fontsize=\footnotesize]{python}
+import math
+print(math.sqrt(9))
+    \end{minted}
+
+    We will add other modules to python with \emph{pip} and \url{https://pypi.org/}.
+\end{frame}
+
+\begin{frame}{Question time}
+    You need to create a data structure so to be able to recover the company name from its market abbreviation.
+    (E.g., you know AAPL and need to retrieve Apple).
+    Which is the best choice?
+    \begin{enumerate}
+            \item a list
+            \item a set
+            \item a dictionary
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Question time}
+    What would you use to store all the names of the companies traded in the nasdaq index?
+    \begin{enumerate}
+            \item a list
+            \item a set
+            \item a dictionary
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Question time}
+    You want to store all the closing values obtained by a certain company in the past week (one value per day), what
+    would you use?
+    \begin{enumerate}
+            \item a list
+            \item a set
+            \item a dictionary
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Question time}
+    What is the value of my\_list?
+    \begin{minted}[fontsize=\footnotesize]{python}
+my_list = [number % 2 for number in range(10, 12)]
+    \end{minted}
+    \begin{enumerate}
+        \item  10, 11, 12
+        \item  0, 1, 0
+        \item  0, 1
+        \item  1, 0, 1
+    \end{enumerate}
+\end{frame}
+
+\end{document}

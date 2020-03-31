@@ -19,7 +19,7 @@
 \author{Stefano Cereda\\
 		stefano.cereda@polimi.it
 	}
-\date{17/03/2020}
+\date{24/03/2020}
 \institute[PoliMi]{Politecnico Milano}
 \logo{\includegraphics[width=15mm]{../logopolimi}}
 
@@ -40,7 +40,7 @@
     clearly and accurately in a programming language.
 \end{frame}
 
-\begin{frame}{Algorithm}
+\begin{frame}{Algorithm definition}
     An algorithm is a \alert{finite sequence of well-defined, unambiguous and computer-implementable instructions}.
 
     ``Draw a nice painting'' is \emph{not} an algorithm.
@@ -49,11 +49,14 @@
     Typically, an algorithm solves a class of problems or performs a computation.
 \end{frame}
 
-\begin{frame}{Algorithm definition}
+\begin{frame}{Algorithm description}
     We can describe an algorithms with different languages: flowcharts, pseudocode, programming languages.
+
+        We typically use a mix of flowcharts and pseudocode to create an \alert{informal} description of the algorithm
+        before moving to the actual implementation.
 \end{frame}
 
-\begin{frame}{Defining an algorithm: flowcharts}
+\begin{frame}{Flowcharts}
     \begin{tikzpicture}[auto, node distance=0.75cm]
 		\node [startstop] (start) {Begin};
 		\node [input, below = of start] (in) {Input};
@@ -113,7 +116,7 @@ end
     \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Defining an algorithm: find the maximum}
+\begin{frame}[fragile]{Creating an algorithm: find the maximum}
     Find the maximum in a list of numbers L=[1,2,3,2,1,4]
 
     \pause
@@ -195,7 +198,7 @@ end
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Pseudocode for pime number}
+\begin{frame}[fragile]{Pseudocode for prime number}
     \begin{lstlisting}[style=pseudo, linewidth=7cm]
 input: A number N.
 output: A boolean value indicating whether N is prime or not.
@@ -285,15 +288,15 @@ print("Hello world!")
 # Declare and initialize an integer variable
 a = 0
 # You can check the type of a variable with:
-type(a)
+print(type(a))
 # Now a string (= sequence of character)
 a = 'Hello world!'
-type(a)
+print(type(a))
 # You can assign to a variable the result of an operation
 a = 1
 b = 2
 c = a+b
-type(c)
+print(type(c))
     \end{minted}
 Run the code in Python REPL
 \end{frame}
@@ -351,6 +354,7 @@ c=float(input())
 delta = b**2 - 4*a*c  # ** means ^
 x1 = (-b + delta**1/2) / (2*a)
 x2 = (-b - delta**1/2) / (2*a)
+# We have computed the square root by exponentiating to 1/2
 
 # The format function, when applied to a string will replace every {} in the string
 # with one of its arguments
@@ -444,7 +448,7 @@ b = float(input())
 c = float(input())
 
 if a <= 0 or b <= 0 or c <= 0:
-    print("They are not the edges of a triangle")
+    print("They are not edges")
 elif (a**2 + b**2 == c**2) or
      (a**2 + c**2 == b**2) or
      (b**2 + c**2 == a**2):
