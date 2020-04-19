@@ -1,0 +1,163 @@
+% !TeX spellcheck = en_GB
+
+\documentclass[aspectratio=169,handout]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+%\usepackage{appendixnumberbeamer}
+
+\input{../setup-flowcharts.tex}
+\input{../setup-pseudocode.tex}
+\input{../setup-python.tex}
+
+\usetheme[titleformat=smallcaps, numbering=fraction, background=light, progressbar=frametitle]{metropolis}
+
+\title{Digital Technology}
+\subtitle{Json CSV Pandas}
+
+\author{Stefano Cereda\\
+		stefano.cereda@polimi.it
+	}
+\date{21/04/2020}
+\institute[PoliMi]{Politecnico Milano}
+\logo{\includegraphics[width=15mm]{../logopolimi}}
+
+\setbeamercovered{invisible}
+
+\makeindex
+
+\begin{document}
+\begin{frame}
+	\maketitle
+\end{frame}
+
+\begin{frame}{JSON}
+    You have seen at lesson that JSON is built with name: value pairs.
+    A JSON file can thus be described with a Python dictionary.
+
+    The JSON module allows to convert a between python objects and their textual JSON representation.
+\end{frame}
+
+\begin{frame}[fragile]{JSON --- dumps}
+    The \emph{dumps} function converts python variables to strings:
+    \begin{minted}{Python}
+import json
+my_dict = {'firstName': 'John',
+           'age': 25
+          }
+print(type(my_dict))
+
+js_repr = json.dumps(my_dict)
+print(js_repr)
+print(type(js_repr))
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{JSON --- loads}
+    The \emph{loads} function is used to convert from string to python objects:
+    \begin{minted}{Python}
+# continues from previous slide
+my_obj = json.loads(js_repr)
+print(my_obj)
+print(type(my_obj))
+    \end{minted}
+\end{frame}
+
+
+\begin{frame}[fragile]{JSON --- dump and load}
+    Usually we want to read and write JSON \emph{files} instead of dealing with strings.
+
+    The \emph{dump} and \emph{load} allow to work with files (no trailing \emph{s} as they do not work with
+    \emph{s}trings.
+
+    To use them, we first need to be able to open files in Python:
+    \begin{minted}[fontsize=\tiny]{Python}
+import json
+my_dict = {'firstName': 'John', 'age': 25 }
+
+# Open a file in write mode
+with open('./my_file.json', 'w') as outfile:
+    # outfile is a variable pointing to my_file.json, opened in write mode
+    json.dump(my_dict, outfile)
+# outfile is closed when we exit the with statement
+
+# now we open the file in read mode and read its content:
+with open('./my_file.json', 'r') as infile:
+    loaded_obj = json.load(infile)
+
+if loaded_obj != my_dict:
+    print("JSON does not work!")
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{The open function}
+    The \emph{open} function opens a file and return the corresponding file object.
+    Its two most important parameters are the \emph{filename}, representing the path to the file to be opened, and the
+    \emph{mode}: a string representing how we should open the file ('w' for write, 'r' for read).
+
+    \url{https://docs.python.org/3/library/functions.html#open}
+\end{frame}
+
+\begin{frame}[fragile]{The with statement}
+    When we finish processing the file we should close it:
+    \begin{minted}{Python}
+outfile = open('./my_file.json', 'w')
+json.dump(my_dict, outfile)
+outfile.close()
+    \end{minted}
+    However, doing this we must remember to close the file, even if the write instruction fails.
+
+    The with statement is a much more convenient way to deal with file objects, as we have seen in previous examples.
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Installing external modules with pip}
+    We have seen how to import a module from the Python standard library:
+    \begin{minted}{Python}
+import math
+from random import uniform
+from json import dumps
+    \end{minted}
+
+    However, there exists many modules which are not included in the standard library (numpy, pandas, scipy,
+    scikit-learn, etc\ldots)
+
+    You can install, upgrade, and remove packages using a program called \emph{pip}:
+    \begin{minted}{text}
+pip install numpy
+pip install pandas
+pip uninstall numpy
+pip freeze
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Virtual environments}
+    Different python applications will require different versions of the packages.
+
+    The solution is to create a virtual environment, a directory that contains a
+    Python installation plus a number of additional packages.
+
+    Virtualenv creation:
+    \begin{minted}{bash}
+python -m venv my_venv
+# equivalent: virtualenv my_venv
+    \end{minted}
+
+    And activation:
+    \begin{minted}{text}
+my_venv\Scripts\activate.bat  # Windows
+source my_venv/bin/activate   # Linux and MacOS
+    \end{minted}
+
+    Using \emph{pip} with an active virtual environment will work on the virtual environment.
+\end{frame}
+
+\begin{frame}{PyCharm, pipenv and anaconda}
+    In PyCharm every project has its own virtual environment, and you can easily manage its packages
+    (File/Settings/Project/Project Interpreter).
+
+    Other widely used programs for managing virtual environments are pipenv and anaconda.
+\end{frame}
+
+\end{document}
