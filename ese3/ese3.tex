@@ -16,8 +16,8 @@
 \subtitle{Json CSV Pandas}
 
 \author{Stefano Cereda\\
-		stefano.cereda@polimi.it
-	}
+stefano.cereda@polimi.it
+}
 \date{21/04/2020}
 \institute[PoliMi]{Politecnico Milano}
 \logo{\includegraphics[width=15mm]{../logopolimi}}
@@ -28,7 +28,7 @@
 
 \begin{document}
 \begin{frame}
-	\maketitle
+    \maketitle
 \end{frame}
 
 \begin{frame}{JSON}
@@ -38,55 +38,55 @@
     The JSON module allows to convert a between python objects and their textual JSON representation.
 \end{frame}
 
-\begin{frame}[fragile]{JSON --- dumps}
+\begin{frame}[fragile]{json.dumps}
     The \emph{dumps} function converts python variables to strings:
-    \begin{minted}{Python}
-import json
-my_dict = {'firstName': 'John',
-           'age': 25
-          }
-print(type(my_dict))
+    \begin{minted}[autogobble]{Python}
+        import json
+        my_dict = {'firstName': 'John',
+                   'age': 25
+                  }
+        print(type(my_dict))
 
-js_repr = json.dumps(my_dict)
-print(js_repr)
-print(type(js_repr))
+        js_repr = json.dumps(my_dict)
+        print(js_repr)
+        print(type(js_repr))
     \end{minted}
 \end{frame}
 
-\begin{frame}[fragile]{JSON --- loads}
+\begin{frame}[fragile]{json.loads}
     The \emph{loads} function is used to convert from string to python objects:
-    \begin{minted}{Python}
-# continues from previous slide
-my_obj = json.loads(js_repr)
-print(my_obj)
-print(type(my_obj))
+    \begin{minted}[autogobble]{Python}
+        # continues from previous slide
+        my_obj = json.loads(js_repr)
+        print(my_obj)
+        print(type(my_obj))
     \end{minted}
 \end{frame}
 
 
-\begin{frame}[fragile]{JSON --- dump and load}
+\begin{frame}[fragile]{json.load and json.dump}
     Usually we want to read and write JSON \emph{files} instead of dealing with strings.
 
     The \emph{dump} and \emph{load} allow to work with files (no trailing \emph{s} as they do not work with
     \emph{s}trings.
 
     To use them, we first need to be able to open files in Python:
-    \begin{minted}[fontsize=\tiny]{Python}
-import json
-my_dict = {'firstName': 'John', 'age': 25 }
+    \begin{minted}[autogobble, fontsize=\tiny]{Python}
+        import json
+        my_dict = {'firstName': 'John', 'age': 25 }
 
-# Open a file in write mode
-with open('./my_file.json', 'w') as outfile:
-    # outfile is a variable pointing to my_file.json, opened in write mode
-    json.dump(my_dict, outfile)
-# outfile is closed when we exit the with statement
+        # Open a file in write mode
+        with open('./my_file.json', 'w') as outfile:
+            # outfile is a variable pointing to my_file.json, opened in write mode
+            json.dump(my_dict, outfile)
+        # outfile is closed when we exit the with statement
 
-# now we open the file in read mode and read its content:
-with open('./my_file.json', 'r') as infile:
-    loaded_obj = json.load(infile)
+        # now we open the file in read mode and read its content:
+        with open('./my_file.json', 'r') as infile:
+            loaded_obj = json.load(infile)
 
-if loaded_obj != my_dict:
-    print("JSON does not work!")
+        if loaded_obj != my_dict:
+            print("JSON does not work!")
     \end{minted}
 \end{frame}
 
@@ -100,10 +100,10 @@ if loaded_obj != my_dict:
 
 \begin{frame}[fragile]{The with statement}
     When we finish processing the file we should close it:
-    \begin{minted}{Python}
-outfile = open('./my_file.json', 'w')
-json.dump(my_dict, outfile)
-outfile.close()
+    \begin{minted}[autogobble]{Python}
+        outfile = open('./my_file.json', 'w')
+        json.dump(my_dict, outfile)
+        outfile.close()
     \end{minted}
     However, doing this we must remember to close the file, even if the write instruction fails.
 
@@ -114,21 +114,21 @@ outfile.close()
 
 \begin{frame}[fragile]{Installing external modules with pip}
     We have seen how to import a module from the Python standard library:
-    \begin{minted}{Python}
-import math
-from random import uniform
-from json import dumps
+    \begin{minted}[autogobble]{Python}
+        import math
+        from random import uniform
+        from json import dumps
     \end{minted}
 
     However, there exists many modules which are not included in the standard library (numpy, pandas, scipy,
     scikit-learn, etc\ldots)
 
     You can install, upgrade, and remove packages using a program called \emph{pip}:
-    \begin{minted}{text}
-pip install numpy
-pip install pandas
-pip uninstall numpy
-pip freeze
+    \begin{minted}[autogobble]{text}
+        pip install numpy
+        pip install pandas
+        pip uninstall numpy
+        pip freeze
     \end{minted}
 \end{frame}
 
@@ -139,15 +139,15 @@ pip freeze
     Python installation plus a number of additional packages.
 
     Virtualenv creation:
-    \begin{minted}{bash}
-python -m venv my_venv
-# equivalent: virtualenv my_venv
+    \begin{minted}[autogobble]{bash}
+        python -m venv my_venv
+        # equivalent: virtualenv my_venv
     \end{minted}
 
     And activation:
-    \begin{minted}{text}
-my_venv\Scripts\activate.bat  # Windows
-source my_venv/bin/activate   # Linux and MacOS
+    \begin{minted}[autogobble]{text}
+        my_venv\Scripts\activate.bat  # Windows
+        source my_venv/bin/activate   # Linux and MacOS
     \end{minted}
 
     Using \emph{pip} with an active virtual environment will work on the virtual environment.
@@ -160,4 +160,129 @@ source my_venv/bin/activate   # Linux and MacOS
     Other widely used programs for managing virtual environments are pipenv and anaconda.
 \end{frame}
 
+\begin{frame}{Pandas}
+    \emph{Pandas} is a data analysis and manipulation library.
+
+    Pandas allows you to open tabular data (like csv, spreadsheet and databases) and obtain Python objects called
+    \emph{DataFrame}.
+
+    \begin{figure}
+        \centering
+        \def\svgwidth{\textwidth}
+        \input{pandas.pdf_tex}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{DataFrame creation and column selection}
+    Let's manually create a DataFrame:
+    \begin{minted}[autogobble]{Python}
+        import pandas as pd
+        my_df = pd.DataFrame({
+            "Name": ["Alice", "Bob", "Charlie"],
+            "Age": [25, 30, 35]
+        })
+        print(my_df)
+    \end{minted}
+
+    \pause
+    Each column is a pandas \emph{Series}.
+    You can select a column using square brackets:
+    \begin{minted}[autogobble]{Python}
+        print(my_df['Age'])
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Simple analysis}
+    We can use the usual min, max, sum, \ldots functions on Series:
+    \begin{minted}[autogobble]{Python}
+        print(sum(my_df['Age']) / len(my_df['Age']))
+    \end{minted}
+
+    Pandas also provide the \emph{.describe()} method, which computes some statistics (in form of another DataFrame):
+    \begin{minted}[autogobble]{Python}
+        print(my_df.describe())
+        print(type(my_df.describe()))
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Opening CSV files}
+    We can easily open a csv file with the \emph{read\_csv} function:
+    \begin{minted}[autogobble]{Python}
+        import pandas as pd
+        df = pd.read_csv('aapl.us.txt')
+        print(df.head(5))  # will print the first 5 rows (tail for last)
+        print(df.describe())
+        print(df.dtypes)  # data types of each column
+        print(df.info())  # technical information
+    \end{minted}
+
+    You can find the csv file on beep.
+\end{frame}
+
+\begin{frame}[fragile]{Savinf DataFrames}
+    You can save a DataFrame to any of the format supported by Pandas:
+    \begin{minted}[autogobble]{Python}
+        import pandas as pd
+        df = pd.read_csv('aapl.us.txt')
+        df.to_excel('./aapl.xslsx')
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Filtering specific rows}
+    We are interested in the days with closing price above 22:
+    \begin{minted}[autogobble]{Python}
+        import pandas as pd
+        df = pd.read_csv('aapl.us.txt')
+        above_22 = df[df['Close'] > 22]
+        print(above_22)
+    \end{minted}
+
+    We are interested in the days with closing price above 22 and below 30:
+    \begin{minted}[autogobble]{Python}
+        middle = df[(df['Close'] > 22) & (df['Close'] < 30)]
+        print(above_22)
+    \end{minted}
+
+    Notice the single \&
+\end{frame}
+
+\begin{frame}[fragile]{Filtering specific rows and columns}
+    We want to obtain the opening prices of the days with closing price above 22:
+    \begin{minted}[autogobble]{Python}
+        prices = df[df['Close'] > 22]['Open']
+        prices = df.loc[df['Close'] > 22, 'Open']
+    \end{minted}
+
+    In the first version we obtain a new DataFrame with the interesting rows and all the columns and then we select the
+    'Open' column.
+
+    In the second row we directly select the interesting rows and columns on the original DataFrame.
+\end{frame}
+
+\begin{frame}[fragile]{loc vs iloc}
+    The \emph{.loc} operator is used when dealing with boolean indexing (as we did before), the \emph{.iloc} operator is
+    used for integer indexing (you know the row and column numbers).
+
+    We want to obtain the opening prices of the rows 2 to 10:
+    \begin{minted}[autogobble]{Python}
+        print(df.columns)  # 'Open' is the second
+        prices = df.iloc[1:10, 1]
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Modifying data}
+    We want to write 1 as the closing price for all the days with opening price above 2.
+
+    We have seen two ways to select the interesting data, let's use them to modify the values:
+    \begin{minted}[autogobble]{Python}
+        print(df.describe())
+        prices_1 = df[df['Open'] > 2]['Close'] = 1
+        prices_2 = df.loc[df['Open'] > 2, 'Close'] = 1
+        print(prices_1.describe())
+        print(prices_2.describe())
+    \end{minted}
+
+    \pause
+    The version without the .loc works on a view of the original DataFrame, so you will lose any change you make.
+\end{frame}
 \end{document}

@@ -1,0 +1,104 @@
+%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'pandas.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%%
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{752.96122951bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.27044619)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0.23862186,0.16251632){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}read\_*\end{tabular}}}}%
+    \put(0.68852933,0.16272634){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}to\_*\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{pandas.pdf}}%
+    \put(0.79558771,0.22993676){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{CSV}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{pandas.pdf}}%
+    \put(0.87207444,0.22993679){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{XLS}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{pandas.pdf}}%
+    \put(0.93843205,0.2337502){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{PARQUET}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{pandas.pdf}}%
+    \put(0.78935309,0.13788189){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{HTML}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{pandas.pdf}}%
+    \put(0.79124537,0.10545902){\color[rgb]{0.83137255,0.33333333,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<>\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{pandas.pdf}}%
+    \put(0.86484076,0.13788189){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{HDF5}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{pandas.pdf}}%
+    \put(0.94067887,0.13788192){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{JSON}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{pandas.pdf}}%
+    \put(0.94956011,0.10589571){\color[rgb]{0.48627451,0.27058824,0.08235294}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{pandas.pdf}}%
+    \put(0.7955877,0.04704833){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{GBQ}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{pandas.pdf}}%
+    \put(0.87107546,0.04704833){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{SQL}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{pandas.pdf}}%
+    \put(0.94707047,0.02981752){\color[rgb]{0.2,0.2,0.2}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{...}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{pandas.pdf}}%
+    \put(0.0137694,0.23377722){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{CSV}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{pandas.pdf}}%
+    \put(0.09025613,0.23377726){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{XLS}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{pandas.pdf}}%
+    \put(0.15661374,0.23759066){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{PARQUET}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{pandas.pdf}}%
+    \put(0.00753478,0.14172235){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{HTML}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{pandas.pdf}}%
+    \put(0.00942705,0.10929949){\color[rgb]{0.83137255,0.33333333,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<>\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{pandas.pdf}}%
+    \put(0.08302244,0.14172235){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{HDF5}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{pandas.pdf}}%
+    \put(0.15886055,0.14172238){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{JSON}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{pandas.pdf}}%
+    \put(0.16774179,0.10973618){\color[rgb]{0.48627451,0.27058824,0.08235294}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{pandas.pdf}}%
+    \put(0.01376939,0.0508888){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{GBQ}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{pandas.pdf}}%
+    \put(0.08925715,0.0508888){\color[rgb]{0.68627451,0.67058824,0.67058824}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{SQL}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=22]{pandas.pdf}}%
+    \put(0.16525216,0.03365799){\color[rgb]{0.2,0.2,0.2}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{...}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=23]{pandas.pdf}}%
+  \end{picture}%
+\endgroup%
