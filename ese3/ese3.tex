@@ -1,6 +1,6 @@
 % !TeX spellcheck = en_GB
 
-\documentclass[aspectratio=169,]{beamer}
+\documentclass[aspectratio=169,handout]{beamer}
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -240,7 +240,7 @@ stefano.cereda@polimi.it
     We are interested in the days with closing price above 22 and below 30:
     \begin{minted}[autogobble]{Python}
         middle = df[(df['Close'] > 22) & (df['Close'] < 30)]
-        print(above_22)
+        print(middle)
     \end{minted}
 
     Notice the single \&
@@ -276,10 +276,10 @@ stefano.cereda@polimi.it
     We have seen two ways to select the interesting data, let's use them to modify the values:
     \begin{minted}[autogobble]{Python}
         print(df.describe())
-        prices_1 = df[df['Open'] > 2]['Close'] = 1
-        prices_2 = df.loc[df['Open'] > 2, 'Close'] = 1
-        print(prices_1.describe())
-        print(prices_2.describe())
+        df[df['Open'] > 2]['Close'] = 1
+        print(df.describe())
+        df.loc[df['Open'] > 2, 'Close'] = 1
+        print(df.describe())
     \end{minted}
 
     \pause

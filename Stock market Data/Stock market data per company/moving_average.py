@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import datetime as dt
 import pandas as pd
 import numpy as np
 import time
@@ -71,9 +74,35 @@ def roi(prices, buys, sells):
     gains -= 1
     return np.prod(gains)
 
-prices = stock['Close']
-bk, sk = keep_strategy(prices).values
+def plot(days, prices, buys, sells, name):
+    plt.plot(days, prices)
+    #plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y/%m/%d'))
+    #plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=300))
+    plt.plot(days[buys], prices[buys], 'go')
+    plt.plot(days[sells], prices[sells], 'ro')
+    plt.title(name)
+    plt.show()
+
+def plot_ma(days, prices, periods):
+    plt.plot(days, prices, label='Closing prices')
+    for period in periods:
+        ma = moving_average_a(prices, period)
+        plt.plot(days, ma, label='MA period {}'.format(period))
+    plt.legend()
+    plt.show()
+
+
+prices = stock['Close'].values
+bk, sk = keep_strategy(prices)
 bg, sg = gain_strategy(prices, sell_ratio=1.1, buy_ratio=0.9)
+
+days = stock['Date']
+days = [dt.datetime.strptime(d, '%Y-%m-%d').date() for d in days]
+days = np.array(days)
+plot(days, prices, bk, sk, name='Simple strategy')
+plot(days, prices, bg, sg, name='Gain strategy')
+
+plot_ma(days, prices, [50,100])
 
 print("Simple strategy ROI: {}".format(roi(prices, bk, sk)))
 print("Complex strategy ROI: {}".format(roi(prices, bg, sg)))
