@@ -437,7 +437,7 @@ plot(days, prices, bg, sg)
     \pause
     \begin{minted}[autogobble, fontsize=\small]{Python}
         def word_length(sentence):
-            return [len(word) for word in sentence if word != 'the']
+            return [len(word) for word in sentence.split(' ') if word != 'the']
     \end{minted}
 \end{frame}
 

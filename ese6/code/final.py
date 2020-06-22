@@ -11,6 +11,7 @@ BUY_RATIO = 0.995
 # Number of k-means centroids
 K = 4
 
+# Function for exercise 1
 def load_dataset():
     dataset = {}
     file_list = os.listdir(MY_DATASET_PATH)
@@ -28,6 +29,7 @@ def load_dataset():
             dataset[company_name] = df
     return dataset
 
+# Function for exercise 2
 def generate_roi_lists(dataset):
     roi_keep = []
     roi_gain = []
@@ -43,9 +45,11 @@ def generate_roi_lists(dataset):
         roi_gain.append(roi(prices, bg, sg))
     return roi_keep, roi_gain
 
+# This comes from previous session
 def keep_strategy(prices):
     return [0], [len(prices) - 1]  # buy and sell days
 
+# This comes from previous session
 def gain_strategy(prices, sell_ratio, buy_ratio):
     buys = [0]
     sells = []
@@ -64,6 +68,7 @@ def gain_strategy(prices, sell_ratio, buy_ratio):
             action_price = price * sell_ratio
     return buys, sells
 
+# This comes from previous session
 def roi(prices, buys, sells):
     # simulate selling last day
     if len(sells) < len(buys):
@@ -72,6 +77,7 @@ def roi(prices, buys, sells):
     gains -= 1
     return np.prod(gains)
 
+# Exercise 4: kmeans init
 def k_means_init(domain, k):
     # This has to work with any number of dimensions, even if our example is 2D
     centroids = {}
@@ -82,6 +88,7 @@ def k_means_init(domain, k):
         centroids[i] = np.array(point)
     return centroids
 
+# Exercise 5: kmeans assignment
 def k_means_assignment(points, centroids):
     assignments = []
     for point in points:
@@ -91,6 +98,7 @@ def k_means_assignment(points, centroids):
         assignments.append(np.argmin(distances))
     return assignments
 
+# Exercise 6 kmeans update
 def k_means_update(points, assignments, old_centroids):
     k = max(assignments) + 1
     new_centroids = {}
@@ -104,7 +112,8 @@ def k_means_update(points, assignments, old_centroids):
             new_centroids[i] = np.mean(assigned_points, axis = 0)
     return new_centroids
 
-def plot_centroids_and_assignments(centroids, xs, ys, colmap):
+# Plot function used in exercise 5
+def plot_centroids_and_assignments(centroids, assignments, xs, ys, colmap):
     # centroids + colored scatter plot
     plt.xlabel('keep')
     plt.ylabel('gain')
@@ -114,8 +123,9 @@ def plot_centroids_and_assignments(centroids, xs, ys, colmap):
     plt.scatter(xs, ys, color=colors, alpha=0.2)
     plt.show()
 
+# Plot function used in exercise 6
 def plot_assignements_and_move_centroids(xs, ys, colmap, centroids,
-                                         new_centroids):
+                                         new_centroids, assignments):
     plt.xlabel('keep')
     plt.ylabel('gain')
     for i in new_centroids.keys():
@@ -126,58 +136,64 @@ def plot_assignements_and_move_centroids(xs, ys, colmap, centroids,
     for i in centroids.keys():
         old_x = centroids[i][0]
         old_y = centroids[i][1]
-        try:
-            dx = new_centroids[i][0] - old_x
-        except:
-            breakpoint()
+        dx = new_centroids[i][0] - old_x
         dy = new_centroids[i][1] - old_y
         plt.arrow(old_x, old_y, dx, dy, color=colmap[i])
     plt.show()
 
 
-dataset = load_dataset()
-roi_keep, roi_gain = generate_roi_lists(dataset)
+# This if is optional
+if __name__ == '__main__':
+    # Exercise 1
+    dataset = load_dataset()
+    # Exercise 2
+    roi_keep, roi_gain = generate_roi_lists(dataset)
 
-# scatter plot
-plt.scatter(roi_keep, roi_gain, color='k')
-plt.xlabel('keep')
-plt.ylabel('gain')
-plt.show()
+    # Exercise 3: scatter plot
+    plt.scatter(roi_keep, roi_gain, color='k')
+    plt.xlabel('keep')
+    plt.ylabel('gain')
+    plt.show()
 
-# where do our points live?
-domain = [[min(r), max(r)] for r in [roi_keep, roi_gain]]
-print(domain)
-centroids = k_means_init(domain, K)
-# scatter plot + centroids
-plt.scatter(roi_keep, roi_gain, color='k')
-plt.xlabel('keep')
-plt.ylabel('gain')
-colmap = {0: 'y', 1: 'r', 2: 'g', 3: 'b'}
-for i in centroids.keys():
-    plt.scatter(*centroids[i], color=colmap[i])
-plt.show()
+    # Exercise 4: kmeans init
+    # where do our points live?
+    domain = [[min(r), max(r)] for r in [roi_keep, roi_gain]]
+    print(domain)
+    centroids = k_means_init(domain, K)
+    # scatter plot + centroids
+    plt.scatter(roi_keep, roi_gain, color='k')
+    plt.xlabel('keep')
+    plt.ylabel('gain')
+    colmap = {0: 'y', 1: 'r', 2: 'g', 3: 'b'}
+    for i in centroids.keys():
+        plt.scatter(*centroids[i], color=colmap[i])
+    plt.show()
 
-points = [(x, y) for x, y in zip(roi_keep, roi_gain)]
-assignments = k_means_assignment(points, centroids)
-plot_centroids_and_assignments(centroids, roi_keep, roi_gain, colmap)
-
-new_centroids = k_means_update(points, assignments, centroids)
-plot_assignements_and_move_centroids(roi_keep, roi_gain, colmap, centroids,
-                                     new_centroids)
-
-# Loop
-change = any([any(new_centroids[i] != centroids[i]) for i in range(K)])
-while change:
-    centroids = new_centroids
+    # Zip function for the list of points
+    points = [(x, y) for x, y in zip(roi_keep, roi_gain)]
+    # Exercise 5: kmeans assignment
     assignments = k_means_assignment(points, centroids)
-    plot_centroids_and_assignments(centroids, roi_keep, roi_gain, colmap)
+    plot_centroids_and_assignments(centroids, assignments, roi_keep, roi_gain, colmap)
 
+    # Exercise 6: kmeans update
     new_centroids = k_means_update(points, assignments, centroids)
     plot_assignements_and_move_centroids(roi_keep, roi_gain, colmap, centroids,
-    new_centroids)
+                                         new_centroids, assignments)
 
+    # Exercise 7: loop until nothing changes
     change = any([any(new_centroids[i] != centroids[i]) for i in range(K)])
+    while change:
+        centroids = new_centroids
+        assignments = k_means_assignment(points, centroids)
+        plot_centroids_and_assignments(centroids, assignments, roi_keep,
+                                       roi_gain, colmap)
 
-# Plot the final assignements
-plt.title('Final assignement')
-plot_centroids_and_assignments(centroids, roi_keep, roi_gain, colmap)
+        new_centroids = k_means_update(points, assignments, centroids)
+        plot_assignements_and_move_centroids(roi_keep, roi_gain, colmap, centroids,
+                                             new_centroids, assignments)
+
+        change = any([any(new_centroids[i] != centroids[i]) for i in range(K)])
+
+    # Plot the final assignements
+    plt.title('Final assignement')
+    plot_centroids_and_assignments(centroids, assignments, roi_keep, roi_gain, colmap)
